@@ -14,7 +14,10 @@ export class AppComponent implements AfterViewInit {
   trigrams: boolean = true;
   lastLetters: boolean = true;
 
+  valueOfSelect = '';
+
   text ='';
+  
   
   canvas;
   ctx;
@@ -62,6 +65,7 @@ export class AppComponent implements AfterViewInit {
 
   onClickMe(){
     this.ngAfterViewInit();
+    console.log(this.valueOfSelect);
 
     for (var i = 0; i < this.charts.length; i++)
     {

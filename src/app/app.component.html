@@ -24,10 +24,11 @@
 <canvas *ngIf="letters" #Letters id="Letters" width="1200" height="1200"></canvas>
 <canvas *ngIf="bigrams" #Bigrams id="Bigrams" width="1200" height="1200"></canvas>
 <canvas *ngIf="trigrams" #Trigrams id="Trigrams" width="1200" height="1200"></canvas>
-<mat-button-toggle-group #group="matButtonToggleGroup">
-    <mat-button-toggle clas="btn" value="frq" aria-label="Text align left" style="line-height: 30px;">Frq
-      <!-- <mat-icon>format_align_left</mat-icon> -->
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <div class="example-selected-value">Selected value: {{group.value}}</div>
+
+<form>
+  <select [(ngModel)]="valueOfSelect" name="valueOfSelect">
+    <option value="frq">Frequency</option>
+    <option value="abc">ABC</option>
+  </select>
+</form>
 <canvas *ngIf="lastLetters" #LastLetters id="LastLetters" width="1200" height="1200"></canvas>
