@@ -28,6 +28,9 @@ export class AppComponent implements AfterViewInit {
   canvases = [];
   ctxs = [];
 
+  letter;
+  letterCount;
+
   ngAfterViewInit() {
     for(var i = 0; i < this.chartNames.length; i++)
     {
@@ -74,6 +77,10 @@ export class AppComponent implements AfterViewInit {
  onChange(newValue) {
     this.onClickMe();
  }
+
+ onChangeLetter(newValue) {
+  this.letterCount = this.getLetterCount(this.text, this.letter);
+}
  
   onClickMe(){
     this.ngAfterViewInit();
@@ -120,7 +127,7 @@ export class AppComponent implements AfterViewInit {
       var r = this.getRandomInt(256);
       var g = this.getRandomInt(256);
       var b = this.getRandomInt(256);
-      var a = 1.0;
+      var a = 0.2;
       var aOne = 1.0;
 
       backgroundColors[i] = ('rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')');
@@ -187,7 +194,7 @@ export class AppComponent implements AfterViewInit {
     var str = text;
     var combinations = new KeyedCollection<number>();
 
-    for (var i = 0; i < str.length && i < str.length - dimension - 1; i++)
+    for (var i = 0; i < str.length && i < str.length - dimension + 1; i++)
     {
       var tempString = str.substring(i, i + dimension);
 
@@ -247,6 +254,22 @@ export class AppComponent implements AfterViewInit {
     }
 
     return combinations;
+  }
+
+  getLetterCount(text: string, letter: string): number {
+    var str = text;
+    var letterLength = letter.length;
+    var count: number = 0;
+
+    for(var i = 0; i < str.length - letterLength + 1; i++)
+    {
+      var tempString = str.substring(i, i + letterLength);
+      if(tempString == letter)
+      {
+        count++;
+      }
+    }
+    return count;
   }
 
   getRandomInt(max) {

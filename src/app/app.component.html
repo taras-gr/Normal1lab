@@ -51,4 +51,7 @@ Order by:
 </select>
 <canvas *ngIf="lastLetters" #LastLetters id="LastLetters" width="1400" height="800"></canvas>
 
+<br/>   Combinations of symbols: 
+<input  type="text" [(ngModel)]="letter" type="text" id="letter" name="letter" (ngModelChange)="onChangeLetter($event)">
+<p>Count: {{letterCount}}</p>
 </div>
