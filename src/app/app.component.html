@@ -1,34 +1,54 @@
 <input class="form-text" [(ngModel)]="text" placeholder="Input you text here:" style="width: 300px; margin-right: 20px;">
 
 <input [(ngModel)]="letters" type="checkbox" id="letters" name="letters" checked>
-<label for="letters">Letters</label>
+<label for="letters">Letters  </label>
 
 <input [(ngModel)]="bigrams" type="checkbox" id="bigrams" name="bigrams">
-<label for="bigrams">Bigrams</label>
+<label for="bigrams">Bigrams  </label>
 
 <input [(ngModel)]="trigrams" type="checkbox" id="trigrams" name="trigrams">
-<label for="trigrams">Trigrams</label>
+<label for="trigrams">Trigrams  </label>
 
 <input [(ngModel)]="lastLetters" type="checkbox" id="lastLetters" name="lastLetters">
-<label for="lastLetters">Last letters</label>
+<label for="lastLetters">Last letters  </label>
+
+  <br/>   Max count on the chart: 
+<input  type="number" [(ngModel)]="maxCount" type="text" id="maxCount" name="maxCount" (ngModelChange)="onChange($event)">
 
 <button id="submitButton" class="btn btn-primary" (click)="onClickMe()">Process</button>
 
-<!-- <mat-button-toggle-group #group="matButtonToggleGroup">
-    <mat-button-toggle clas="btn" value="frq" aria-label="Text align left">Frq
-      <mat-icon>format_align_left</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <div class="example-selected-value">Selected value: {{group.value}}</div> -->
-
-<canvas *ngIf="letters" #Letters id="Letters" width="1200" height="1200"></canvas>
-<canvas *ngIf="bigrams" #Bigrams id="Bigrams" width="1200" height="1200"></canvas>
-<canvas *ngIf="trigrams" #Trigrams id="Trigrams" width="1200" height="1200"></canvas>
-
-<form>
-  <select [(ngModel)]="valueOfSelect" name="valueOfSelect">
+<div class="wrapper">
+<br />
+<br />
+Order by:
+  <select [(ngModel)]="lettersOrder" name="lettersOrder" (ngModelChange)="onChange($event)">
     <option value="frq">Frequency</option>
     <option value="abc">ABC</option>
   </select>
-</form>
-<canvas *ngIf="lastLetters" #LastLetters id="LastLetters" width="1200" height="1200"></canvas>
+<canvas *ngIf="letters" #Letters id="Letters" width="1400" height="800"></canvas>
+<br />
+<br />
+Order by:
+<select [(ngModel)]="bigramsOrder" name="bigramsOrder" (ngModelChange)="onChange($event)">
+  <option value="frq">Frequency</option>
+  <option value="abc">ABC</option>
+</select>
+<canvas *ngIf="bigrams" #Bigrams id="Bigrams" width="1400" height="800"></canvas>
+<br />
+<br />
+Order by:
+<select [(ngModel)]="trigramsOrder" name="trigramsOrder" (ngModelChange)="onChange($event)">
+  <option value="frq">Frequency</option>
+  <option value="abc">ABC</option>
+</select>
+<canvas *ngIf="trigrams" #Trigrams id="Trigrams" width="1400" height="800"></canvas>
+<br />
+<br />
+Order by:
+<select [(ngModel)]="lastLettersOrder" name="lastLettersOrder" (ngModelChange)="onChange($event)">
+  <option value="frq">Frequency</option>
+  <option value="abc">ABC</option>
+</select>
+<canvas *ngIf="lastLetters" #LastLetters id="LastLetters" width="1400" height="800"></canvas>
+
+</div>
