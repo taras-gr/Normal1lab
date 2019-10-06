@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import * as Chart from 'chart.js';
 import { KeyedCollection } from './KeyedCollection';
 
@@ -9,10 +9,10 @@ import { KeyedCollection } from './KeyedCollection';
 })
 
 export class AppComponent implements AfterViewInit {
-  letters: boolean = false;
-  bigrams: boolean;
-  trigrams: boolean;
-  lastLetterss: boolean;
+  letters: boolean = true;
+  bigrams: boolean = true;
+  trigrams: boolean = true;
+  lastLetters: boolean = true;
 
   text ='';
   
@@ -20,46 +20,60 @@ export class AppComponent implements AfterViewInit {
   ctx;
   chart;
 
-  ngAfterViewInit() {
-    this.canvas = <HTMLCanvasElement>document.getElementById('Letters');
-    this.ctx = this.canvas.getContext('2d');
+  charts = [];
+  chartNames = ["Letters", "Bigrams", "Trigrams", "LastLetters"];
 
-    this.chart = new Chart(this.ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-              ],
-              borderColor: [
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          responsive: false,
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
+  canvases = [];
+  ctxs = [];
+
+  ngAfterViewInit() {
+    for(var i = 0; i < this.chartNames.length; i++)
+    {
+        this.canvases[i] = <HTMLCanvasElement>document.getElementById(this.chartNames[i]);
+        this.ctxs[i] = this.canvases[i].getContext('2d');
+
+        this.charts[i] = new Chart(this.ctxs[i], {
+          type: 'horizontalBar',
+          data: {
+              labels: [],
+              datasets: [{
+                  label: '# of occurrences',
+                  data: [],
+                  backgroundColor: [
+                  ],
+                  borderColor: [
+                  ],
+                  borderWidth: 1
               }]
+          },
+          options: {
+              responsive: false,
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
           }
-      }
-  });
+      });
+    }
  }
 
   onClickMe(){
     this.ngAfterViewInit();
-    var combinations = this.getCombinations(this.text, 3);
-    this.fillChartData(combinations);
-    this.fillChartColors(combinations);
-    this.chart.update();
+
+    for (var i = 0; i < this.charts.length; i++)
+    {
+      var combinations = this.getCombinations(this.text, i + 1);
+      this.fillChartData(combinations, this.charts[i]);
+      this.fillChartColors(combinations, this.charts[i]);
+      this.charts[i].update();
+    }
+    
   }
 
-  fillChartColors(combinations: KeyedCollection<number>)
+  fillChartColors(combinations: KeyedCollection<number>, chart)
   {
     let backgroundColors = new Array<string>(combinations.Count());
     let borderColors = new Array<string>(combinations.Count());
@@ -76,11 +90,11 @@ export class AppComponent implements AfterViewInit {
       borderColors[i] = ('rgba(' + r + ', ' + g + ', ' + b + ', ' + aOne + ')');
     }
 
-    this.chart.data.datasets[0].backgroundColor = backgroundColors;
-    this.chart.data.datasets[0].borderColor = borderColors;
+    chart.data.datasets[0].backgroundColor = backgroundColors;
+    chart.data.datasets[0].borderColor = borderColors;
   }
 
-  fillChartData(combinations: KeyedCollection<number>)
+  fillChartData(combinations: KeyedCollection<number>, chart)
   {
     var klychi: string[] = []; 
     
@@ -106,8 +120,8 @@ export class AppComponent implements AfterViewInit {
 
     for (var i = 0; i < 100; i++)
     {
-      this.chart.data.datasets[0].data[i] = values[i];
-      this.chart.data.labels[i] = klychi[i];
+      chart.data.datasets[0].data[i] = values[i];
+      chart.data.labels[i] = klychi[i];
     }
   }
 
