@@ -1,7 +1,20 @@
-<input [(ngModel)]="text" placeholder="text">
+<input class="form-text" [(ngModel)]="text" placeholder="Input you text here:" style="width: 300px; margin-right: 20px;">
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<input [(ngModel)]="letters" type="checkbox" id="letters" name="letters" checked>
+<label for="letters">Letters</label>
 
+<input [(ngModel)]="bigrams" type="checkbox" id="bigrams" name="bigrams">
+<label for="bigrams">Bigrams</label>
 
+<input [(ngModel)]="trigrams" type="checkbox" id="trigrams" name="trigrams">
+<label for="trigrams">Trigrams</label>
 
-<button (click)="onClickMe()">Click me!</button>
+<input [(ngModel)]="lastLetters" type="checkbox" id="lastLetters" name="lastLetters">
+<label for="lastLetters">Last letters</label>
+
+<button id="submitButton" class="btn btn-primary" (click)="onClickMe()">Process</button>
+
+<canvas *ngIf="letters" #Letters id="Letters" width="1200" height="600"></canvas>
+<canvas *ngIf="bigrams" #Bigrmas id="Bigrmas" width="1200" height="600"></canvas>
+<canvas *ngIf="trigrams" #Trigrams id="Trigrams" width="1200" height="600"></canvas>
+<canvas *ngIf="lastLetters" #LastLetter id="LastLetter" width="1200" height="600"></canvas>
