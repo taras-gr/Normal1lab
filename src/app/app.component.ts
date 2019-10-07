@@ -205,10 +205,10 @@ export class AppComponent implements AfterViewInit {
 
       else {
 
-        if (!tempString.includes(" "))
-        {
+        //if (!tempString.includes(" "))
+        //{
           combinations.Add(tempString, 1);
-        }
+        //} 
 
       }
     }
