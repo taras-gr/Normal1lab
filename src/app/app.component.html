@@ -16,7 +16,7 @@
 <label for="lastLetters">Last letters  </label>
 
   <br/>   Max count on the chart: 
-<input  type="number" [(ngModel)]="maxCount" type="text" id="maxCount" name="maxCount" (ngModelChange)="onChange($event)">
+<input  type="number" [(ngModel)]="maxCount" type="text" id="maxCount" name="maxCount" (ngModelChange)="onClickMe()">
 
 <button id="submitButton" class="btn btn-primary" (click)="onClickMe()">Process</button>
 
@@ -24,35 +24,35 @@
 <br />
 <br />
 Order by:
-  <select [(ngModel)]="lettersOrder" name="lettersOrder" (ngModelChange)="onChange($event)">
+  <select [(ngModel)]="lettersOrder" name="lettersOrder" (ngModelChange)="onChange(0, lettersOrder)">
     <option value="frq">Frequency</option>
     <option value="abc">ABC</option>
   </select>
-<canvas *ngIf="letters" #Letters id="Letters" width="1400" height="800"></canvas>
+<canvas #Letters id="Letters" width="1400" height="600"></canvas>
 <br />
 <br />
 Order by:
-<select [(ngModel)]="bigramsOrder" name="bigramsOrder" (ngModelChange)="onChange($event)">
+<select [(ngModel)]="bigramsOrder" name="bigramsOrder" (ngModelChange)="onChange(1, bigramsOrder)">
   <option value="frq">Frequency</option>
   <option value="abc">ABC</option>
 </select>
-<canvas *ngIf="bigrams" #Bigrams id="Bigrams" width="1400" height="800"></canvas>
+<canvas #Bigrams id="Bigrams" width="1400" height="800"></canvas>
 <br />
 <br />
 Order by:
-<select [(ngModel)]="trigramsOrder" name="trigramsOrder" (ngModelChange)="onChange($event)">
+<select [(ngModel)]="trigramsOrder" name="trigramsOrder" (ngModelChange)="onChange(2, trigramsOrder)">
   <option value="frq">Frequency</option>
   <option value="abc">ABC</option>
 </select>
-<canvas *ngIf="trigrams" #Trigrams id="Trigrams" width="1400" height="800"></canvas>
+<canvas #Trigrams id="Trigrams" width="1400" height="800"></canvas>
 <br />
 <br />
 Order by:
-<select [(ngModel)]="lastLettersOrder" name="lastLettersOrder" (ngModelChange)="onChange($event)">
+<select [(ngModel)]="lastLettersOrder" name="lastLettersOrder" (ngModelChange)="onChange(3, lastLettersOrder)">
   <option value="frq">Frequency</option>
   <option value="abc">ABC</option>
 </select>
-<canvas *ngIf="lastLetters" #LastLetters id="LastLetters" width="1400" height="800"></canvas>
+<canvas #LastLetters id="LastLetters" width="1400" height="800"></canvas>
 
 <br/>   Combinations of symbols: 
 <input  type="text" [(ngModel)]="letter" type="text" id="letter" name="letter" (ngModelChange)="onChangeLetter($event)">
