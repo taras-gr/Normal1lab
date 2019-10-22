@@ -20,6 +20,10 @@
 
 <button id="submitButton" class="btn btn-primary" (click)="onClickMe()">Process</button>
 
+<br/>   Combinations of symbols: 
+<input  type="text" [(ngModel)]="letter" type="text" id="letter" name="letter" (ngModelChange)="onChangeLetter($event)">
+<p>Count: {{letterCount}}</p>
+
 <div class="wrapper">
 <br />
 <br />
@@ -54,7 +58,5 @@ Order by:
 </select>
 <canvas #LastLetters id="LastLetters" width="1400" height="800"></canvas>
 
-<br/>   Combinations of symbols: 
-<input  type="text" [(ngModel)]="letter" type="text" id="letter" name="letter" (ngModelChange)="onChangeLetter($event)">
-<p>Count: {{letterCount}}</p>
+
 </div>
