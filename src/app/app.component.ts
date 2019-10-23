@@ -105,6 +105,7 @@ export class AppComponent implements AfterViewInit {
       {
         this.charts[i].getCombinations(this.text, i + 1);
       }
+      console.log(this.charts[i].combinations);
       this.charts[i].onChange(this.maxCount, defaultOrder);
     }
   }  
